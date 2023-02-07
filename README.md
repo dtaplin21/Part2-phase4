@@ -1,4 +1,4 @@
-# Sequelize-4 Assessment
+# Sequelize-4 Practice Assessment
 
 **Note:** To read this in a rendered view, open your VS Code Command Palette
 (using Control+Shift+P on Windows, Command+Shift+P on macOS) and choose
@@ -38,16 +38,19 @@ Run `npm test` to run the all the test specs at any given time.
 Create a **.env** file at root-level of your project and copy the contents of
 the **.env.example** file into the newly created **.env** file.
 
-Run the migration and seed files. Take a look at the migration and model files
-to familiarize yourself with the data of this application.
+Run the migration files (Do **not** run the seed files yet). Take a look at the
+migration and model files to familiarize yourself with the data of this
+application.
 
-## Resetting Migration, Model, and Seed Files
+## Making edits to the files
 
-Feel free to make edits to the migration, model, and seed files. All edits you
-make to these files will be reset when you submit your project. So, make sure
-the test specs still pass even after those files are reset.
+**Do not** make edits to the **existing** migration and seed files. You can
+create more migration files, but you cannot edit the existing migration files.
 
-You can reset your edits to the migration and model files by running the
+All edits you make to these files will be reset when you submit your project.
+So, make sure the test specs still pass even after those files are reset.
+
+You can reset your edits to the original migration and seed files by running the
 following command:
 
 ```bash
@@ -56,8 +59,8 @@ npm run reset-files
 
 ## Database Schema
 
-Currently, the migrations in this project will create a database schema
-that follows this diagram:
+Currently, the existing migration files in this project will create a database
+schema that follows this diagram:
 
 ![db-schema-without-relationships]
 
@@ -74,8 +77,15 @@ that isn't shown in the diagram:
 * When a `Fan` entry is deleted, all the related `DraftPicks` table entries
   should **automatically** be deleted
 
-Make sure to update the models to reflect the database schema changes and create
-the appropriate associations while going through the rest of this project.
+**Make sure to update the models** to reflect the database schema changes and
+create the appropriate associations while going through the rest of this
+project.
+
+Run the seeds to make sure that the migration and model files are good enough
+to continue onto the API specs. **IMPORTANT NOTE**:The seed files are not
+testing whether or not your migration and model files are correctly implemented.
+You may still need to make changes to the new migration files and existing/new
+model files even if the seeds successfully run.
 
 ## API Specs
 

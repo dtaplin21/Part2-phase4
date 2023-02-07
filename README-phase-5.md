@@ -3,7 +3,7 @@
 Run `npm test test/phase-5-spec` to make sure you pass all the specs in this
 phase.
 
-### GET /teams/:id
+## GET /teams/:id
 
 The `GET /teams/:id` endpoint should return the `Team` specified by its
 `id` and all its associated `Sport`(s) and `Player`(s). The `Player`(s) should be listed under the property `TeamRoster`.

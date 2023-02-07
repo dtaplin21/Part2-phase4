@@ -108,21 +108,26 @@ const players = [
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    for (let playerInfo of players) {
-      const { firstName, lastName, number, isRetired } = playerInfo;
-      let foundTeam;
-      if (playerInfo.currentTeam) {
-        foundTeam = await Team.findOne({
-          where: { name: playerInfo.currentTeam }
+    try {
+      for (let playerInfo of players) {
+        const { firstName, lastName, number, isRetired } = playerInfo;
+        let foundTeam;
+        if (playerInfo.currentTeam) {
+          foundTeam = await Team.findOne({
+            where: { name: playerInfo.currentTeam }
+          });
+        }
+        await Player.create({
+          firstName,
+          lastName,
+          number,
+          isRetired,
+          currentTeamId: foundTeam ? foundTeam.id : null
         });
       }
-      await Player.create({
-        firstName,
-        lastName,
-        number,
-        isRetired,
-        currentTeamId: foundTeam ? foundTeam.id : null
-      });
+    } catch(err) {
+      console.error(err);
+      throw err;
     }
   },
 

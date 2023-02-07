@@ -39,25 +39,30 @@ const matches = [
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    if (Match) {
-      for (let matchInfo of matches) {
-        const { matchDate } = matchInfo;
-        const foundHomeTeam = await Team.findOne({
-          where: { name: matchInfo.homeTeam }
-        });
-        const foundAwayTeam = await Team.findOne({
-          where: { name: matchInfo.awayTeam }
-        });
-        const foundWinner = await Team.findOne({
-          where: { name: matchInfo.winner }
-        });
-        await Match.create({
-          matchDate,
-          homeTeamId: foundHomeTeam.id,
-          awayTeamId: foundAwayTeam.id,
-          winnerId: foundWinner.id,
-        });
+    try {
+      if (Match) {
+        for (let matchInfo of matches) {
+          const { matchDate } = matchInfo;
+          const foundHomeTeam = await Team.findOne({
+            where: { name: matchInfo.homeTeam }
+          });
+          const foundAwayTeam = await Team.findOne({
+            where: { name: matchInfo.awayTeam }
+          });
+          const foundWinner = await Team.findOne({
+            where: { name: matchInfo.winner }
+          });
+          await Match.create({
+            matchDate,
+            homeTeamId: foundHomeTeam.id,
+            awayTeamId: foundAwayTeam.id,
+            winnerId: foundWinner.id,
+          });
+        }
       }
+    } catch(err) {
+      console.error(err);
+      throw err;
     }
   },
 

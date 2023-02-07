@@ -19,7 +19,12 @@ const sports = [
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await Sport.bulkCreate(sports, { validate: true });
+    try {
+      await Sport.bulkCreate(sports, { validate: true });
+    } catch(err) {
+      console.error(err);
+      throw err;
+    }
   },
 
   async down (queryInterface, Sequelize) {

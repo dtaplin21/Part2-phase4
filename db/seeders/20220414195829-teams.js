@@ -67,16 +67,21 @@ const teams = [
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    for (let teamInfo of teams) {
-      const { name, homeCity } = teamInfo;
-      const foundSport = await Sport.findOne({
-        where: { name: teamInfo.sport }
-      });
-      await Team.create({
-        name,
-        homeCity,
-        sportId: foundSport.id
-      });
+    try {
+      for (let teamInfo of teams) {
+        const { name, homeCity } = teamInfo;
+        const foundSport = await Sport.findOne({
+          where: { name: teamInfo.sport }
+        });
+        await Team.create({
+          name,
+          homeCity,
+          sportId: foundSport.id
+        });
+      }
+    } catch(err) {
+      console.error(err);
+      throw err;
     }
   },
 

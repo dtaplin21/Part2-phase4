@@ -55,18 +55,23 @@ const drafts = [
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    for (let draftInfo of drafts) {
-      const { player, fan } = draftInfo;
-      const foundPlayer = await Player.findOne({
-        where: player
-      });
-      const foundFan = await Fan.findOne({
-        where: { username: fan }
-      });
-      await DraftPick.create({
-        playerId: foundPlayer.id,
-        fanId: foundFan.id,
-      });
+    try {
+      for (let draftInfo of drafts) {
+        const { player, fan } = draftInfo;
+        const foundPlayer = await Player.findOne({
+          where: player
+        });
+        const foundFan = await Fan.findOne({
+          where: { username: fan }
+        });
+        await DraftPick.create({
+          playerId: foundPlayer.id,
+          fanId: foundFan.id,
+        });
+      }
+    } catch(err) {
+      console.error(err);
+      throw err;
     }
   },
 

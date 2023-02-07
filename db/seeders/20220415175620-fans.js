@@ -22,7 +22,12 @@ const fans = [
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await Fan.bulkCreate(fans, { validate: true });
+    try {
+      await Fan.bulkCreate(fans, { validate: true });
+    } catch(err) {
+      console.error(err);
+      throw err;
+    }
   },
 
   async down (queryInterface, Sequelize) {

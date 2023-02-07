@@ -1,43 +1,40 @@
 # BONUS Phase
 
 If you are finished with studying for the assessment and want an extra
-challenge, try this bonus phase out! Otherwise, you can skip this phase as this
-depth of understanding required for this phase will not be tested for on the
-actual assessment.
+challenge, try this bonus phase out!
 
-Create a new migration that will change the database schema to turn the current
-schema into this diagram.
+The test specs can be found in the __test/bonus/phase-bonus-spec.js__ file.
 
-![db-schema-bonus]
+Run `npm test test/bonus/phase-bonus-spec` to make sure you pass all the specs
+in this bonus phase.
 
-Make sure to update the models to reflect the database schema changes and create
-the appropriate associations while going through the rest of this phase.
+## GET /teams
 
-Also make sure to re-migrate and re-seed the entire database from scratch.
+The `GET /teams` endpoint should return all the `Team`s ordered first by
+by `homeCity` alphabetically then by `name` in **reverse** alphabetical order.
 
-Uncomment the contents of the __test/phase-bonus-spec.js__ file.
-
-Run `npm test test/phase-bonus-spec` to see which test specs you can get to
-pass.
-
-### GET /matches/:id
-
-The `GET /matches/:id` endpoint should return the `Match` specified by `id`. It
-should also returned all its associated `Team`s. However, a `Match` can be
-associated with a `Team` in `3` different ways, through the `homeTeamId`,
-`awayTeamId`, and the `winnerId`. Return all `3` types of associated `Team`s so
-that a request to `GET /matches/1` should return something like this:
+After migrating and seeding the database, the endpoint should return the
+something like this:
 
 ```json
-{
-    "id": 1,
-    "homeTeamId": 9,
-    "awayTeamId": 10,
-    "matchDate": "2022-02-28T00:00:00.000Z",
-    "createdAt": "2022-04-21T19:16:09.764Z",
-    "updatedAt": "2022-04-21T19:16:09.764Z",
-    "winnerId": 9,
-    "HomeTeam": {
+[
+    {
+        "id": 12,
+        "name": "New England Patriots",
+        "homeCity": "Boston",
+        "sportId": 4,
+        "createdAt": "2022-04-21T19:16:09.727Z",
+        "updatedAt": "2022-04-21T19:16:09.727Z"
+    },
+    {
+        "id": 4,
+        "name": "Boston Red Sox",
+        "homeCity": "Boston",
+        "sportId": 2,
+        "createdAt": "2022-04-21T19:16:09.715Z",
+        "updatedAt": "2022-04-21T19:16:09.715Z"
+    },
+    {
         "id": 9,
         "name": "Green Bay Packers",
         "homeCity": "Green Bay",
@@ -45,70 +42,77 @@ that a request to `GET /matches/1` should return something like this:
         "createdAt": "2022-04-21T19:16:09.723Z",
         "updatedAt": "2022-04-21T19:16:09.723Z"
     },
-    "AwayTeam": {
+    {
+        "id": 2,
+        "name": "Liverpool FC",
+        "homeCity": "Liverpool",
+        "sportId": 1,
+        "createdAt": "2022-04-21T19:16:09.712Z",
+        "updatedAt": "2022-04-21T19:16:09.712Z"
+    },
+    {
+        "id": 7,
+        "name": "Los Angeles Lakers",
+        "homeCity": "Los Angeles",
+        "sportId": 3,
+        "createdAt": "2022-04-21T19:16:09.720Z",
+        "updatedAt": "2022-04-21T19:16:09.720Z"
+    },
+    {
+        "id": 8,
+        "name": "Los Angeles Clippers",
+        "homeCity": "Los Angeles",
+        "sportId": 3,
+        "createdAt": "2022-04-21T19:16:09.721Z",
+        "updatedAt": "2022-04-21T19:16:09.721Z"
+    },
+    {
+        "id": 1,
+        "name": "Manchester United",
+        "homeCity": "Manchester",
+        "sportId": 1,
+        "createdAt": "2022-04-21T19:16:09.710Z",
+        "updatedAt": "2022-04-21T19:16:09.710Z"
+    },
+    {
+        "id": 3,
+        "name": "New York Yankees",
+        "homeCity": "New York City",
+        "sportId": 2,
+        "createdAt": "2022-04-21T19:16:09.714Z",
+        "updatedAt": "2022-04-21T19:16:09.714Z"
+    },
+    {
+        "id": 6,
+        "name": "New York Knicks",
+        "homeCity": "New York City",
+        "sportId": 3,
+        "createdAt": "2022-04-21T19:16:09.719Z",
+        "updatedAt": "2022-04-21T19:16:09.719Z"
+    },
+    {
+        "id": 11,
+        "name": "New York Giants",
+        "homeCity": "New York City",
+        "sportId": 4,
+        "createdAt": "2022-04-21T19:16:09.726Z",
+        "updatedAt": "2022-04-21T19:16:09.726Z"
+    },
+    {
+        "id": 5,
+        "name": "Brooklyn Nets",
+        "homeCity": "New York City",
+        "sportId": 3,
+        "createdAt": "2022-04-21T19:16:09.717Z",
+        "updatedAt": "2022-04-21T19:16:09.717Z"
+    },
+    {
         "id": 10,
         "name": "Tampa Bay Buccaneers",
         "homeCity": "Tampa Bay",
         "sportId": 4,
         "createdAt": "2022-04-21T19:16:09.725Z",
         "updatedAt": "2022-04-21T19:16:09.725Z"
-    },
-    "Winner": {
-        "id": 9,
-        "name": "Green Bay Packers",
-        "homeCity": "Green Bay",
-        "sportId": 4,
-        "createdAt": "2022-04-21T19:16:09.723Z",
-        "updatedAt": "2022-04-21T19:16:09.723Z"
-    }
-}
-```
-
-### GET /teams/:teamId/homeMatchesWon
-
-The `GET /teams/:teamId/homeMatchesWon` endpoint should return all the `Match`s
-the `Team` specified by `id` is a `Winner` of when the team was the `HomeTeam`.
-Include the associated `AwayTeam` on each `Match`.
-
-A request to `GET /teams/7/homeMatchesWon` should return something like this:
-
-```json
-[
-    {
-        "id": 2,
-        "homeTeamId": 7,
-        "awayTeamId": 8,
-        "matchDate": "2022-03-30T00:00:00.000Z",
-        "createdAt": "2022-04-21T19:16:09.766Z",
-        "updatedAt": "2022-04-21T19:16:09.766Z",
-        "winnerId": 7,
-        "AwayTeam": {
-            "id": 8,
-            "name": "Los Angeles Clippers",
-            "homeCity": "Los Angeles",
-            "sportId": 3,
-            "createdAt": "2022-04-21T19:16:09.721Z",
-            "updatedAt": "2022-04-21T19:16:09.721Z"
-        }
-    },
-    {
-        "id": 4,
-        "homeTeamId": 7,
-        "awayTeamId": 5,
-        "matchDate": "2022-04-03T00:00:00.000Z",
-        "createdAt": "2022-04-21T19:16:09.769Z",
-        "updatedAt": "2022-04-21T19:16:09.769Z",
-        "winnerId": 7,
-        "AwayTeam": {
-            "id": 5,
-            "name": "Brooklyn Nets",
-            "homeCity": "New York City",
-            "sportId": 3,
-            "createdAt": "2022-04-21T19:16:09.717Z",
-            "updatedAt": "2022-04-21T19:16:09.717Z"
-        }
     }
 ]
 ```
-
-[db-schema-bonus]: https://appacademy-open-assets.s3.us-west-1.amazonaws.com/Modular-Curriculum/content/week-11/assessments/practice-db-schema-bonus.png

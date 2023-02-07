@@ -3,7 +3,7 @@
 Run `npm test test/phase-4-spec` to make sure you pass all the specs in this
 phase.
 
-### GET /fans/:fanId/drafts
+## GET /fans/:fanId/drafts
 
 The `GET /fans/:fanId/drafts` endpoint should return all the `Player`s that the
 `Fan` specified by `fanId` is associated with.
@@ -88,7 +88,7 @@ this (`DraftPick` property on each `Player` is not needed):
 ]
 ```
 
-### DELETE /fans/:id
+## DELETE /fans/:id
 
 The `DELETE /fans/:id` endpoint should delete the `Fan` specified by `id` which
 should also trigger a cascade deletion of all its associated `DraftPick`s.
@@ -105,7 +105,7 @@ return something like this:
 }
 ```
 
-### POST /teams/:id/players
+## POST /teams/:id/players
 
 Create a new draft player in the `Players` table that is associated with an
 existing `Team` specified by its `id` attribute.
