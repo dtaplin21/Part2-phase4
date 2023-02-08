@@ -82,10 +82,26 @@ create the appropriate associations while going through the rest of this
 project.
 
 Run the seeds to make sure that the migration and model files are good enough
-to continue onto the API specs. **IMPORTANT NOTE**:The seed files are not
-testing whether or not your migration and model files are correctly implemented.
-You may still need to make changes to the new migration files and existing/new
-model files even if the seeds successfully run.
+to continue onto the API specs. You **should not move on** until all the seeds
+are successfully seeded.
+
+Change the database schema by doing **one or more of the following**:
+
+* Creating new migration files
+* Updating the existing model files
+* Creating new model files
+
+Do not change the database schema by:
+
+* Updating the existing migration files
+
+**Important Note**: You must create new migrations to implement the
+relationships. Any changes to the existing migration files will be reset when
+you submit your assessment.
+
+The seed files are not testing whether or not your migration
+and model files are correctly implemented. You may still need to make
+changes to them depending on the instructions to come.
 
 ## API Specs
 
