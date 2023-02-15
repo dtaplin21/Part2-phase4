@@ -68,9 +68,7 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     if (Match) {
-      await queryInterface.bulkDelete('Matches', {
-        where: {}
-      }, {});
+      await queryInterface.bulkDelete('Matches', {}, {});
     }
   }
 };

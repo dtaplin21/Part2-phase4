@@ -28,8 +28,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Sports', {
-      where: { name: sports.map(sport => sport.name) }
-    }, {});
+    await queryInterface.bulkDelete('Sports', { name: sports.map(sport => sport.name) }, {});
   }
 };

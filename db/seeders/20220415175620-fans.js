@@ -31,8 +31,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Fans', {
-      where: { username: fans.map(sport => sport.username) }
-    }, {});
+    await queryInterface.bulkDelete('Fans', { username: fans.map(sport => sport.username) }, {});
   }
 };
